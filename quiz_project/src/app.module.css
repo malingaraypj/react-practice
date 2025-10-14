@@ -41,4 +41,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.questions::-webkit-scrollbar {
+  display: none;
 }

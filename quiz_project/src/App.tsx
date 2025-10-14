@@ -8,17 +8,13 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [active, setActive] = useState<number>(-1);
   useEffect(() => {
-    console.log("app mounted");
     async function fetchQuestions() {
       const newQuestions = await getData();
       setQuestions(newQuestions);
+      console.log(newQuestions);
     }
 
     fetchQuestions();
-
-    return () => {
-      console.log("app demounted");
-    };
   }, []);
   return (
     <div className={classes.container}>
@@ -39,7 +35,12 @@ function App() {
       <div className={classes.questions}>
         {questions &&
           questions.map((question, idx) => (
-            <QuestionCard isActive={active === idx} question={question} />
+            <QuestionCard
+              key={idx}
+              serialNo={idx + 1}
+              isActive={active === idx}
+              question={question}
+            />
           ))}
       </div>
     </div>

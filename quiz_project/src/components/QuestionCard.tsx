@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import classes from "./questionCard.module.css";
+import he from "he";
+import { shuffleArray } from "../helper/questionCard";
 
 interface questionType {
   type: string;
@@ -7,15 +9,20 @@ interface questionType {
   category: string;
   question: string;
   correct_answer: string;
-  incorrect_anwers: string[];
+  incorrect_answers: string[];
 }
 
 interface reactCardType {
   question: questionType;
   isActive: boolean;
+  serialNo: number;
 }
 
-const QuestionCard: React.FC<reactCardType> = ({ question, isActive }) => {
+const QuestionCard: React.FC<reactCardType> = ({
+  question,
+  isActive,
+  serialNo,
+}) => {
   const questionRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (isActive) {
@@ -25,9 +32,19 @@ const QuestionCard: React.FC<reactCardType> = ({ question, isActive }) => {
       });
     }
   }, [isActive]);
+  const mixedQuestions = [...question.incorrect_answers];
+  mixedQuestions.push(question.correct_answer);
+  const shuffledAnswers = shuffleArray(mixedQuestions);
   return (
     <div ref={questionRef} className={classes.card}>
-      {question.category}
+      <h1>
+        <span style={{ margin: "5px" }}>{serialNo}</span>
+        {he.decode(question.question)}
+      </h1>
+
+      {shuffledAnswers.map((answer, idx) => (
+        <li key={idx}>{he.decode(answer)}</li>
+      ))}
     </div>
   );
 };
