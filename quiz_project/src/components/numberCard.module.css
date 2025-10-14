@@ -1,20 +1,40 @@
 .card {
-  background-color: blueviolet;
-  color: aliceblue;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  color: white;
+  background-color: #3a3a3a;
+  transition: all 0.2s ease-in-out;
 }
 
-.card:hover {
-  scale: 115%;
-  cursor: pointer;
+/* Answered questions: green */
+.answered {
+  background-color: #2ecc71;
 }
 
+/* Not answered questions: red or grayish tone */
+.not-answered {
+  background-color: #e74c3c;
+}
+
+/* Marked for review */
+.marked {
+  background-color: #1279d4;
+  color: #f5f0f0;
+}
+
+/* Active (currently selected question) */
 .active {
-  box-shadow: 2px 2px 3px 2px rgb(174, 159, 237);
+  box-shadow: 0 0 10px 3px rgba(174, 159, 237, 0.8);
+  transform: scale(1.1);
+}
+
+/* Hover interaction */
+.card:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }

@@ -17,7 +17,7 @@ function QuizPage() {
             key={idx}
             onClick={() => contx.selectItem(idx)}
             isActive={idx === contx.active}
-            curNumber={idx + 1}
+            curIdx={idx}
           />
         ))}
       </div>

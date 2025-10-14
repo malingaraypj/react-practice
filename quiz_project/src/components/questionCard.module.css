@@ -14,22 +14,52 @@
   display: none;
 }
 
-.card h1 {
+.header {
+  display: flex;
   background-color: rgb(241, 180, 75);
   overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
   padding: 5px 8px;
   font-weight: 700;
   line-break: auto;
 }
 
-.card li {
+.header .icons {
+  background-color: purple;
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.header .icons:hover {
+  scale: 1.1;
+  cursor: pointer;
+}
+
+.card div li {
   list-style-type: none;
   padding: 2px 5px;
   font-size: medium;
   font-weight: 500;
 }
 
-.card li:hover {
+.card div div {
+  width: 90%;
+  margin: auto;
+  margin: 10px 10px;
+}
+
+.options div {
+}
+
+.options li:hover {
   background-color: rgb(103, 236, 236);
   cursor: pointer;
 }

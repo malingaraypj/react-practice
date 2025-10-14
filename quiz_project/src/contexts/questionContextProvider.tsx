@@ -9,7 +9,9 @@ interface Props {
 
 const QuestionContextProvider: React.FC<Props> = ({ children }) => {
   const [questions, setQuestions] = useState<questionType[]>([]);
-  const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([]);
+  const [answeredQuestions, setAnsweredQuestions] = useState<
+    { idx: number; val: string }[]
+  >([]);
   const [reviewQuestions, setReviewQuestions] = useState<number[]>([]);
   const [selected, setSelected] = useState<number>(0);
 
@@ -23,15 +25,29 @@ const QuestionContextProvider: React.FC<Props> = ({ children }) => {
     fetchQuestions();
   }, []);
 
-  const handleAnswerQuestion = (idx: number) => {
-    // check if already answered
-    const check = answeredQuestions.findIndex(
-      (questionIdx) => questionIdx === idx
-    );
-    if (check === -1) {
-      setAnsweredQuestions((prev) => [...prev, idx]);
+  const handleRemoveReview = (idx: number) => {
+    if (reviewQuestions.includes(idx)) {
+      setReviewQuestions((prev) => prev.filter((revIdx) => revIdx !== idx));
     }
   };
+
+  const handleAnswerQuestion = (idx: number, val: string) => {
+    // Check if already answered
+    const existingIndex = answeredQuestions.findIndex(
+      (question) => question.idx === idx
+    );
+
+    if (existingIndex === -1) {
+      setAnsweredQuestions((prev) => [...prev, { idx, val }]);
+    } else {
+      setAnsweredQuestions((prev) =>
+        prev.map((q) => (q.idx === idx ? { idx, val } : q))
+      );
+    }
+
+    handleRemoveReview(idx);
+  };
+
   const handleReviewQuestion = (idx: number) => {
     if (!reviewQuestions.includes(idx)) {
       setReviewQuestions((prev) => [...prev, idx]);
@@ -39,15 +55,9 @@ const QuestionContextProvider: React.FC<Props> = ({ children }) => {
   };
 
   const handleUnanswerQuestion = (idx: number) => {
-    // check if answered or not
-    const check = answeredQuestions.findIndex(
-      (questionIdx) => questionIdx === idx
+    setAnsweredQuestions((prev) =>
+      prev.filter((question) => question.idx !== idx)
     );
-    if (check !== -1) {
-      setAnsweredQuestions((prev) =>
-        prev.filter((questionIdx) => questionIdx !== idx)
-      );
-    }
   };
 
   const handleIsMarked = (idx: number) => {
@@ -55,7 +65,7 @@ const QuestionContextProvider: React.FC<Props> = ({ children }) => {
   };
 
   const handleIsAnswered = (idx: number) => {
-    return answeredQuestions.includes(idx);
+    return answeredQuestions.findIndex(({ idx: qIdx }) => qIdx === idx) !== -1;
   };
 
   const context: questionContextType = {

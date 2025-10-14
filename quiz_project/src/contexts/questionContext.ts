@@ -4,13 +4,13 @@ import type { questionType } from "../module/questionModule";
 export interface questionContextType {
   active: number;
   items: questionType[];
-  answered: number[];
+  answered: { idx: number; val: string }[];
   marked: number[];
-  answer: (idx: number) => void;
+  answer: (idx: number, val: string) => void;
   unAnswer: (idx: number) => void;
   markReview: (idx: number) => void;
-  isMarked: (idx: number) => void;
-  isAnswered: (idx: number) => void;
+  isMarked: (idx: number) => boolean;
+  isAnswered: (idx: number) => boolean;
   selectItem: (idx: number) => void;
 }
 
@@ -22,7 +22,7 @@ export const QuestionContext = createContext<questionContextType>({
   answer: () => {},
   unAnswer: () => {},
   markReview: () => {},
-  isMarked: () => {},
-  isAnswered: () => {},
+  isMarked: () => false,
+  isAnswered: () => false,
   selectItem: () => {},
 });
