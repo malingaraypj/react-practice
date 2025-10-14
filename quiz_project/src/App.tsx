@@ -4,7 +4,6 @@ import QuestionContextProvider from "./contexts/questionContextProvider";
 function App() {
   return (
     <QuestionContextProvider>
-      {" "}
       <QuizPage />
     </QuestionContextProvider>
   );

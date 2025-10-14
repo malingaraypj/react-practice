@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import classes from "./app.module.css";
 import NumberCard from "./components/numberCard";
 import QuestionCard from "./components/QuestionCard";
 import { QuestionContext } from "./contexts/questionContext";
 
 function QuizPage() {
-  const [active, setActive] = useState<number>(-1);
   const contx = useContext(QuestionContext);
   return (
     <div className={classes.container}>
@@ -16,8 +15,8 @@ function QuizPage() {
         {contx.items.map((_, idx) => (
           <NumberCard
             key={idx}
-            onClick={() => setActive(idx)}
-            isActive={idx === active}
+            onClick={() => contx.selectItem(idx)}
+            isActive={idx === contx.active}
             curNumber={idx + 1}
           />
         ))}
@@ -29,7 +28,7 @@ function QuizPage() {
             <QuestionCard
               key={idx}
               serialNo={idx + 1}
-              isActive={active === idx}
+              isActive={contx.active === idx}
               question={question}
             />
           ))}

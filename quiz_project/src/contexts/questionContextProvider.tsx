@@ -9,6 +9,9 @@ interface Props {
 
 const QuestionContextProvider: React.FC<Props> = ({ children }) => {
   const [questions, setQuestions] = useState<questionType[]>([]);
+  const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([]);
+  const [reviewQuestions, setReviewQuestions] = useState<number[]>([]);
+  const [selected, setSelected] = useState<number>(0);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -20,17 +23,52 @@ const QuestionContextProvider: React.FC<Props> = ({ children }) => {
     fetchQuestions();
   }, []);
 
+  const handleAnswerQuestion = (idx: number) => {
+    // check if already answered
+    const check = answeredQuestions.findIndex(
+      (questionIdx) => questionIdx === idx
+    );
+    if (check === -1) {
+      setAnsweredQuestions((prev) => [...prev, idx]);
+    }
+  };
+  const handleReviewQuestion = (idx: number) => {
+    if (!reviewQuestions.includes(idx)) {
+      setReviewQuestions((prev) => [...prev, idx]);
+    }
+  };
+
+  const handleUnanswerQuestion = (idx: number) => {
+    // check if answered or not
+    const check = answeredQuestions.findIndex(
+      (questionIdx) => questionIdx === idx
+    );
+    if (check !== -1) {
+      setAnsweredQuestions((prev) =>
+        prev.filter((questionIdx) => questionIdx !== idx)
+      );
+    }
+  };
+
+  const handleIsMarked = (idx: number) => {
+    return reviewQuestions.includes(idx);
+  };
+
+  const handleIsAnswered = (idx: number) => {
+    return answeredQuestions.includes(idx);
+  };
+
   const context: questionContextType = {
+    active: selected,
     items: questions,
-    answer: (idx: number) => {
-      console.log("Answer question", idx);
-    },
-    unAnswer: (idx: number) => {
-      console.log("Unanswer question", idx);
-    },
-    markReview: (idx: number) => {
-      console.log("Mark question for review", idx);
-    },
+    answered: answeredQuestions,
+    marked: reviewQuestions,
+    answer: handleAnswerQuestion,
+    unAnswer: handleUnanswerQuestion,
+    markReview: handleReviewQuestion,
+    isMarked: handleIsMarked,
+    isAnswered: handleIsAnswered,
+    selectItem: setSelected,
   };
 
   return (
