@@ -2,15 +2,7 @@ import { useEffect, useRef } from "react";
 import classes from "./questionCard.module.css";
 import he from "he";
 import { shuffleArray } from "../helper/questionCard";
-
-interface questionType {
-  type: string;
-  difficulty: string;
-  category: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
+import type { questionType } from "../module/questionModule";
 
 interface reactCardType {
   question: questionType;
