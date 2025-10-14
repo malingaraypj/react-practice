@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import classes from "./app.module.css";
+import classes from "./questionsPage.module.css";
 import NumberCard from "./components/numberCard";
 import QuestionCard from "./components/QuestionCard";
 import { QuestionContext } from "./contexts/questionContext";

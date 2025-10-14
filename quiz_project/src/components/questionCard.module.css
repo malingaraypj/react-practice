@@ -56,9 +56,6 @@
   margin: 10px 10px;
 }
 
-.options div {
-}
-
 .options li:hover {
   background-color: rgb(103, 236, 236);
   cursor: pointer;

@@ -1,0 +1,74 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  font-family: "Poppins", sans-serif;
+}
+
+.card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 3rem 4rem;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.title {
+  font-size: 2rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #475569;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* New Quiz button */
+.newQuiz {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.newQuiz:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+/* View Results button */
+.results {
+  background-color: #facc15;
+  color: #1e293b;
+}
+
+.results:hover {
+  background-color: #eab308;
+  transform: scale(1.05);
+}

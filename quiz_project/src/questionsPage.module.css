@@ -26,8 +26,11 @@
 .numberCards {
   display: flex;
   gap: 10px;
-  justify-content: center;
+  justify-content: start;
   padding: 5px;
+  width: 80%;
+  margin: auto;
+  flex-wrap: wrap;
 }
 
 .questions {
