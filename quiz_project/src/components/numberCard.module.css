@@ -1,0 +1,20 @@
+.card {
+  background-color: blueviolet;
+  color: aliceblue;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.card:hover {
+  scale: 115%;
+  cursor: pointer;
+}
+
+.active {
+  box-shadow: 2px 2px 3px 2px rgb(174, 159, 237);
+}
