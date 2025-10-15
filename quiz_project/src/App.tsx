@@ -1,7 +1,8 @@
 import QuestionContextProvider from "./contexts/questionContextProvider";
-import LandingPage from "./landingPage";
+import LandingPage from "./pages/landingPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import QuizPage from "./QuizPage";
+import QuizPage from "./pages/QuizPage";
+import ModalContextProvider from "./contexts/modalContextProvider";
 
 function App() {
   const router = createBrowserRouter([
@@ -11,7 +12,9 @@ function App() {
 
   return (
     <QuestionContextProvider>
-      <RouterProvider router={router} />
+      <ModalContextProvider>
+        <RouterProvider router={router} />
+      </ModalContextProvider>
     </QuestionContextProvider>
   );
 }
