@@ -6,6 +6,7 @@ const ModalContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [activeModal, setActiveModal] = useState<string>("");
 
+  console.log(activeModal);
   const contextValue: ModalContextType = {
     activeModal,
     openModal: (val: string) => setActiveModal(val),

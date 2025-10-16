@@ -1,18 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import classes from "./questionsPage.module.css";
 import NumberCard from "../components/numberCard";
 import QuestionCard from "../components/QuestionCard";
 import { QuestionContext } from "../contexts/questionContext";
-import { ModalContext } from "../contexts/modalContext";
 
 function QuizPage() {
   const contx = useContext(QuestionContext);
-  const modalCtx = useContext(ModalContext);
-  useEffect(() => {
-    modalCtx.openModal("quiz");
 
-    return () => modalCtx.closeModal();
-  }, [modalCtx]);
   return (
     <div className={classes.container}>
       <div className={classes.header}>
