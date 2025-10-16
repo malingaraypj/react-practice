@@ -1,12 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import classes from "./questionsPage.module.css";
 import NumberCard from "../components/numberCard";
 import QuestionCard from "../components/QuestionCard";
 import { QuestionContext } from "../contexts/questionContext";
+import { TimerContext } from "../contexts/timerContext";
 
 function QuizPage() {
   const contx = useContext(QuestionContext);
+  const timeCtx = useContext(TimerContext);
 
+  useEffect(() => {
+    timeCtx.startTimer();
+  }, [timeCtx]);
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -33,6 +38,10 @@ function QuizPage() {
               question={question}
             />
           ))}
+      </div>
+
+      <div>
+        <button className={classes.timer}>{timeCtx.curTime}</button>
       </div>
     </div>
   );
