@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { QuestionContext, type questionContextType } from "./questionContext";
 import { getData } from "../data/questions";
 import type { questionType } from "../module/questionModule";
+import { shuffleArray } from "../helper/questionCard";
 
 interface Props {
   children: ReactNode;
@@ -18,12 +19,41 @@ const QuestionContextProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     async function fetchQuestions() {
       const newQuestions = await getData();
-      setQuestions(newQuestions);
-      console.log(newQuestions);
+
+      // Shuffle the answers for each question before setting them
+      const shuffledQuestions = newQuestions.map((question: questionType) => {
+        const answers = shuffleArray([
+          ...question.incorrect_answers,
+          question.correct_answer,
+        ]);
+        return { ...question, ["answers"]: answers };
+      });
+
+      setQuestions(shuffledQuestions);
+      console.log(shuffledQuestions);
     }
 
     fetchQuestions();
   }, []);
+
+  const handleCheckCorrectness = (idx: number) => {
+    const answered = answeredQuestions.find(
+      ({ idx: ansIdx }) => ansIdx === idx
+    );
+
+    return answered?.val === questions[idx].correct_answer;
+  };
+
+  const handleCorrectAnswer = (idx: number) => {
+    const question = questions[idx];
+    if (!question || !question.answers) return -1;
+
+    return question.answers.findIndex(
+      (ans) =>
+        ans.trim().toLowerCase() ===
+        question.correct_answer.trim().toLowerCase()
+    );
+  };
 
   const handleRemoveReview = (idx: number) => {
     if (reviewQuestions.includes(idx)) {
@@ -37,6 +67,7 @@ const QuestionContextProvider: React.FC<Props> = ({ children }) => {
       (question) => question.idx === idx
     );
 
+    console.log(idx, val);
     if (existingIndex === -1) {
       setAnsweredQuestions((prev) => [...prev, { idx, val }]);
     } else {
@@ -79,6 +110,8 @@ const QuestionContextProvider: React.FC<Props> = ({ children }) => {
     isMarked: handleIsMarked,
     isAnswered: handleIsAnswered,
     selectItem: setSelected,
+    isCorrect: handleCheckCorrectness,
+    handleCorrectAnswer,
   };
 
   return (

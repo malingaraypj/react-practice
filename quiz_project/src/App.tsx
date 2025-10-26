@@ -5,6 +5,7 @@ import QuizPage from "./pages/QuizPage";
 import ModalContextProvider from "./contexts/modalContextProvider";
 import TimerContextProvider from "./contexts/TimerContextProvider";
 import NavWrapper from "./components/NavWrapper";
+import ResultPage from "./pages/ResultPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,7 @@ function App() {
       children: [{ index: true, element: <LandingPage /> }],
     },
     { path: "/quiz", element: <QuizPage /> },
+    { path: "/result", element: <ResultPage /> },
   ]);
 
   return (

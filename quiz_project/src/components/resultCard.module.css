@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card {
+  background-color: rgba(106, 218, 246, 0.826);
+  width: 80%;
+  min-height: 180px;
+  margin: auto;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.questions {
+  width: 80vw;
+  height: 80vh;
+  background-color: aquamarine;
+  margin: auto;
+  margin-top: 5px;
+  border-radius: 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.questions::-webkit-scrollbar {
+  display: none;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
+}
+
+.header {
+  display: flex;
+  background-color: rgb(241, 180, 75);
+  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  padding: 5px 8px;
+  font-weight: 700;
+  line-break: auto;
+}
+
+.answers {
+  margin: 10px;
+  padding: 5px;
+}
+
+.answers li {
+  list-style-type: none;
+}
+
+.answers .correct {
+  background-color: greenyellow;
+}
+.answers .wrong {
+  background-color: rgb(233, 127, 127);
+}

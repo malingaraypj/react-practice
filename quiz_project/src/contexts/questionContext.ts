@@ -12,6 +12,8 @@ export interface questionContextType {
   isMarked: (idx: number) => boolean;
   isAnswered: (idx: number) => boolean;
   selectItem: (idx: number) => void;
+  isCorrect: (idx: number) => boolean;
+  handleCorrectAnswer: (idx: number) => number;
 }
 
 export const QuestionContext = createContext<questionContextType>({
@@ -24,5 +26,7 @@ export const QuestionContext = createContext<questionContextType>({
   markReview: () => {},
   isMarked: () => false,
   isAnswered: () => false,
+  isCorrect: () => false,
   selectItem: () => {},
+  handleCorrectAnswer: () => 0,
 });

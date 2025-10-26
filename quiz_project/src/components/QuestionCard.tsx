@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import classes from "./questionCard.module.css";
 import he from "he";
-import { shuffleArray } from "../helper/questionCard";
 import type { questionType } from "../module/questionModule";
 import { QuestionContext } from "../contexts/questionContext";
 import { ImCheckmark2 } from "react-icons/im";
@@ -18,7 +17,7 @@ const QuestionCard: React.FC<reactCardType> = ({
   serialNo,
 }) => {
   const questionRef = useRef<HTMLDivElement>(null);
-  const contex = useContext(QuestionContext);
+  const questionCtx = useContext(QuestionContext);
   useEffect(() => {
     if (isActive) {
       questionRef.current?.scrollIntoView({
@@ -27,9 +26,7 @@ const QuestionCard: React.FC<reactCardType> = ({
       });
     }
   }, [isActive]);
-  const mixedQuestions = [...question.incorrect_answers];
-  mixedQuestions.push(question.correct_answer);
-  const shuffledAnswers = shuffleArray(mixedQuestions);
+
   return (
     <div ref={questionRef} className={classes.card}>
       <div className={classes.header}>
@@ -41,15 +38,18 @@ const QuestionCard: React.FC<reactCardType> = ({
         </div>
         <div
           className={classes.icons}
-          onClick={() => contex.markReview(serialNo - 1)}
+          onClick={() => questionCtx.markReview(serialNo - 1)}
           title="Mark for Review"
         >
           <ImCheckmark2 color="white" />
         </div>
       </div>
       <div className={classes.options}>
-        {shuffledAnswers.map((answer, idx) => (
-          <li onClick={() => contex.answer(serialNo - 1, answer)} key={idx}>
+        {question.answers.map((answer, idx) => (
+          <li
+            key={idx}
+            onClick={() => questionCtx.answer(serialNo - 1, answer)}
+          >
             <span style={{ margin: "10px" }}>{idx + 1}</span>
             {he.decode(answer)}
           </li>
