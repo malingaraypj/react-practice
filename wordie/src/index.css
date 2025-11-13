@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-stone-400 min-h-screen flex flex-col font-sans;
+}

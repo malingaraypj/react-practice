@@ -1,0 +1,30 @@
+.present {
+  background-color: #c9b458; /* yellow-ish like wordle */
+  color: white;
+  border: none;
+}
+
+.correct {
+  background-color: #6aaa64; /* green */
+  color: white;
+  border: none;
+}
+
+.absent {
+  background-color: #787c7e; /* gray */
+  color: white;
+  border: none;
+}
+
+.tile {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #3a3a3c;
+  margin: 3px;
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
